@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/AliveDD/rtc1/static/css/main.1fe1b451.chunk.css",
+    "main.js": "/AliveDD/rtc1/static/js/main.054fff48.chunk.js",
+    "main.js.map": "/AliveDD/rtc1/static/js/main.054fff48.chunk.js.map",
+    "runtime-main.js": "/AliveDD/rtc1/static/js/runtime-main.443f6432.js",
+    "runtime-main.js.map": "/AliveDD/rtc1/static/js/runtime-main.443f6432.js.map",
+    "static/js/2.04680572.chunk.js": "/AliveDD/rtc1/static/js/2.04680572.chunk.js",
+    "static/js/2.04680572.chunk.js.map": "/AliveDD/rtc1/static/js/2.04680572.chunk.js.map",
+    "index.html": "/AliveDD/rtc1/index.html",
+    "precache-manifest.f991e294b42e77dc78318d1b4bb64c6f.js": "/AliveDD/rtc1/precache-manifest.f991e294b42e77dc78318d1b4bb64c6f.js",
+    "service-worker.js": "/AliveDD/rtc1/service-worker.js",
+    "static/css/main.1fe1b451.chunk.css.map": "/AliveDD/rtc1/static/css/main.1fe1b451.chunk.css.map",
+    "static/js/2.04680572.chunk.js.LICENSE.txt": "/AliveDD/rtc1/static/js/2.04680572.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.443f6432.js",
+    "static/js/2.04680572.chunk.js",
+    "static/css/main.1fe1b451.chunk.css",
+    "static/js/main.054fff48.chunk.js"
+  ]
+}
