@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "da34be2f3ecedfce38ef53c16ab2474b",
+    "revision": "88c6d461a285586775e5062fe106be23",
     "url": "/alivedd/rtc1/index.html"
   },
   {
-    "revision": "de2955e4781818c7eaa1",
+    "revision": "8662e614556f1381705e",
     "url": "/alivedd/rtc1/static/css/main.1fe1b451.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alivedd/rtc1/static/js/2.24c76269.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "de2955e4781818c7eaa1",
-    "url": "/alivedd/rtc1/static/js/main.cb38b177.chunk.js"
+    "revision": "8662e614556f1381705e",
+    "url": "/alivedd/rtc1/static/js/main.63b7a24d.chunk.js"
   },
   {
     "revision": "b3921963041f67f9662b",

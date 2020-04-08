@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/alivedd/rtc1/precache-manifest.0cc2172d76cf75053719d8c0ffe324b6.js"
+  "/alivedd/rtc1/precache-manifest.d466dd5b1e71e6534200701da00f00b5.js"
 );
 
 self.addEventListener('message', (event) => {
