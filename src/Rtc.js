@@ -1,6 +1,5 @@
 import React from "react";
 import Peer from "simple-peer";
-// import "./styles.css";
 
 function gotMedia(stream) {
   var peer1 = new Peer({ initiator: true, stream: stream });
