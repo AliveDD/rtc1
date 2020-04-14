@@ -11,10 +11,20 @@ body {
 video {
   transform: scaleX(-1) translate(50%, -50%);
   position: absolute;
+  z-index: -1;
   left: 50%;
   top: 50%;
-  filter: hue-rotate(180deg) invert(100%) saturate(62%) sepia(15%)
-    contrast(138%);
+  /* filter: hue-rotate(180deg) invert(100%) saturate(62%) sepia(15%)
+    contrast(138%); */
+  opacity: 0.15;
   min-width: 100vw;
   min-height: 100vh;
+}
+
+.toggle {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
 }

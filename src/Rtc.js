@@ -14,7 +14,7 @@ function gotMedia(stream) {
   });
 
   peer2.on("stream", (stream) => {
-    var videoNode = document.querySelector("video");
+    var videoNode = document.querySelector(".fullVid");
     if ("srcObject" in videoNode) {
       videoNode.srcObject = stream;
     } else {
@@ -40,7 +40,7 @@ class Rtc extends React.Component {
   }
 
   render() {
-    return <video />;
+    return <video className="fullVid" />;
   }
 }
 

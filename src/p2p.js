@@ -13,7 +13,7 @@ const initialState = {
   names: {},
 };
 
-const myVideo = document.querySelector(".myVideo");
+var myVideo = document.querySelector(".myVideo");
 
 function reducer(state, action) {
   switch (action.type) {
@@ -55,6 +55,10 @@ export default function App() {
     setPeers(connections.current.map(({ peer }) => peer));
   }, []);
 
+  const broadcast = useCallback((msg) => {
+    connections.current.map((conn) => conn.send(msg));
+  }, []);
+
   const connect = useCallback(
     (peerId, handler) => {
       if (connectedPeers().includes(peerId)) {
@@ -82,24 +86,12 @@ export default function App() {
     [connectedPeers, removeFromSwarm]
   );
 
-  const broadcast = useCallback((msg) => {
-    connections.current.map((conn) => conn.send(msg));
-  }, []);
-
   const handleOutgoingConnection = useCallback(
     (conn) => {
       addToSwarm(conn);
 
       conn.on("data", (data) => {
-        if (data) {
-          if ("srcObject" in myVideo) {
-            myVideo.srcObject = data;
-          } else {
-            myVideo.src = window.URL.createObjectURL(data);
-          }
-          myVideo.play();
-        }
-
+        console.log("data", data);
         if (data.type === "peer discovery") {
           data.payload.peers
             .filter((peerId) => !connectedPeers().includes(peerId))
@@ -132,18 +124,6 @@ export default function App() {
         .filter((peerId) => !connectedPeers().includes(peerId))
         .map((peerId) => connect(peerId, handleOutgoingConnection));
 
-      broadcast("try to start a stream");
-      navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-          audio: false,
-        })
-        .then((stream) => {
-          console.log("stream", stream);
-          broadcast(stream);
-        })
-        .catch(() => {});
-
       const myUniquePeers = connectedPeers().filter(
         (peerId) => !newConnectionPeers.includes(peerId) && peerId !== myPeerId
       );
@@ -154,14 +134,7 @@ export default function App() {
         });
       }
     },
-    [
-      connectedPeers,
-      addToSwarm,
-      broadcast,
-      connect,
-      handleOutgoingConnection,
-      myPeerId,
-    ]
+    [connectedPeers, addToSwarm, connect, handleOutgoingConnection, myPeerId]
   );
 
   const onIncoming = useCallback(
@@ -236,7 +209,7 @@ export default function App() {
         </button>
       </form>
 
-      <h2>Your connections</h2>
+      <h2>Your connections:</h2>
       <ul>
         <li key={myPeerId}>{myPeerId} (you)</li>
         {peers.map((item, i) => (
