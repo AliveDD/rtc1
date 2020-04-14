@@ -6,7 +6,6 @@ function gotMedia(stream) {
   var peer2 = new Peer();
 
   peer1.on("signal", (data) => {
-    console.log("data", data);
     peer2.signal(data);
   });
 
