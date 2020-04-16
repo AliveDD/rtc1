@@ -151,7 +151,7 @@ export default function App() {
         navigator.mediaDevices
           .getUserMedia({
             video: true,
-            audio: false,
+            audio: true,
           })
           .then((stream) => {
             const call = peer.current.call(connPeerId, stream);
@@ -191,7 +191,7 @@ export default function App() {
       navigator.mediaDevices
         .getUserMedia({
           video: true,
-          audio: false,
+          audio: true,
         })
         .then((stream) => {
           console.log("stream", stream);
