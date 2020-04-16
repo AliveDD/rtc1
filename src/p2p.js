@@ -247,6 +247,7 @@ export default function App() {
           autoComplete="off"
           autoCorrect="off"
           spellCheck="false"
+          autoFocus
           onChange={(e) => setConnectTo(e.target.value)}
           value={connectTo}
           id="connectTo"
