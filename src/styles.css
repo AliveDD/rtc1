@@ -1,11 +1,8 @@
-* {
-  box-sizing: border-box;
-}
-
 main {
   max-width: 320px;
   margin: 0 auto;
-  padding: 6.2vh 6.2vw;
+  padding: 32px;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 0.15);
 }
 
@@ -69,4 +66,5 @@ ul {
 
 li {
   padding: 4px 0;
+  box-sizing: border-box;
 }

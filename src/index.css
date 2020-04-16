@@ -8,17 +8,36 @@ body {
   background: #595959;
 }
 
-video {
+/* video {
   transform: scaleX(-1) translate(50%, -50%);
   position: absolute;
   z-index: -1;
   left: 50%;
   top: 50%;
-  /* filter: hue-rotate(180deg) invert(100%) saturate(62%) sepia(15%)
-    contrast(138%); */
   opacity: 0.15;
   min-width: 100vw;
   min-height: 100vh;
+} */
+
+.myVideo {
+  border: 2px solid hsla(180, 50%, 50%, 1);
+  height: 160px;
+  width: 240px;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(-1);
+}
+.theyVideo {
+  border: 2px solid hsla(180, 50%, 50%, 1);
+  height: 160px;
+  width: 240px;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
+  transform: scaleX(-1);
 }
 
 .toggle {

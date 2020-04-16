@@ -13,7 +13,8 @@ const initialState = {
   names: {},
 };
 
-var myVideo = document.querySelector(".myVideo");
+const myVideo = document.querySelector(".myVideo");
+const theyVideo = document.querySelector(".theyVideo");
 
 function reducer(state, action) {
   switch (action.type) {
@@ -42,21 +43,21 @@ export default function App() {
     [myPeerId]
   );
 
+  // const broadcast = useCallback((msg) => {
+  //   console.log("broadcast", msg);
+  //   connections.current.map((conn) => conn.send(msg));
+  // }, []);
+
   const addToSwarm = useCallback((conn) => {
     connections.current.push(conn);
     setPeers(connections.current.map(({ peer }) => peer));
   }, []);
-
   const removeFromSwarm = useCallback((conn) => {
     connections.current.splice(
       connections.current.findIndex(({ peer }) => peer === conn.peer),
       1
     );
     setPeers(connections.current.map(({ peer }) => peer));
-  }, []);
-
-  const broadcast = useCallback((msg) => {
-    connections.current.map((conn) => conn.send(msg));
   }, []);
 
   const connect = useCallback(
@@ -81,7 +82,9 @@ export default function App() {
 
       outgoingConnection.on("open", onOpen);
       outgoingConnection.on("close", onClose);
-      outgoingConnection.on("error", (err) => console.error(err.message));
+      outgoingConnection.on("error", (err) =>
+        console.error("err", err.message)
+      );
     },
     [connectedPeers, removeFromSwarm]
   );
@@ -91,7 +94,7 @@ export default function App() {
       addToSwarm(conn);
 
       conn.on("data", (data) => {
-        console.log("data", data);
+        // console.log("handle Outgoing Conn", conn);
         if (data.type === "peer discovery") {
           data.payload.peers
             .filter((peerId) => !connectedPeers().includes(peerId))
@@ -114,6 +117,7 @@ export default function App() {
       addToSwarm(conn);
 
       conn.on("data", (data) => {
+        console.log("handle Incoming Conn", data);
         if (data.type !== "peer discovery") {
           dispatch(data);
         }
@@ -141,6 +145,27 @@ export default function App() {
     (incomingConnection) => {
       const onOpen = () => {
         handleIncomingConnection(incomingConnection);
+
+        // get video from connection
+        const connPeerId = connections.current[0].peer;
+        navigator.mediaDevices
+          .getUserMedia({
+            video: true,
+            audio: false,
+          })
+          .then((stream) => {
+            const call = peer.current.call(connPeerId, stream);
+            call.on("stream", (remoteStream) => {
+              if ("srcObject" in myVideo) {
+                myVideo.srcObject = remoteStream;
+              } else {
+                myVideo.src = window.URL.createObjectURL(remoteStream);
+              }
+              myVideo.play();
+            });
+          })
+          .catch(() => {});
+
         incomingConnection.off("open", onOpen);
       };
       const onClose = () => {
@@ -158,6 +183,31 @@ export default function App() {
     peer.current.on("open", (id) => {
       setMyPeerId(id);
     });
+
+    peer.current.on("call", (call) => {
+      // console.log("2 handleIncomingConnection conn", conn);
+
+      navigator.mediaDevices
+        .getUserMedia({
+          video: true,
+          audio: false,
+        })
+        .then((stream) => {
+          console.log("stream", stream);
+          call.answer(stream);
+
+          call.on("stream", (stream) => {
+            if ("srcObject" in theyVideo) {
+              theyVideo.srcObject = stream;
+            } else {
+              theyVideo.src = window.URL.createObjectURL(stream);
+            }
+            theyVideo.play();
+          });
+        })
+        .catch(() => {});
+    });
+
     peer.current.on("connection", onIncoming);
   }, [onIncoming]);
 
@@ -172,8 +222,8 @@ export default function App() {
   }, [init, cleanup]);
 
   const handleConnectSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+    (ev) => {
+      ev.preventDefault();
       setConnectTo("");
       connect(connectTo, handleOutgoingConnection);
     },

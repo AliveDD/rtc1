@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Rtc from "./Rtc.js";
+// import Rtc from "./Rtc.js";
 import P2P from "./p2p.js";
 
 export default function App() {
