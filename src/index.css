@@ -21,23 +21,21 @@ body {
 
 .myVideo {
   border: 2px solid hsla(180, 50%, 50%, 1);
-  height: 160px;
-  width: 240px;
+  min-width: 85vw;
   position: absolute;
   z-index: 1;
   bottom: 0;
-  left: 0;
-  transform: scaleX(-1);
+  left: 50%;
+  transform: scaleX(-1) translate(50%, 0);
 }
 .theyVideo {
   border: 2px solid hsla(180, 50%, 50%, 1);
-  height: 160px;
-  width: 240px;
+  min-width: 85vw;
   position: absolute;
   z-index: 1;
   bottom: 0;
-  right: 0;
-  transform: scaleX(-1);
+  left: 50%;
+  transform: scaleX(-1) translate(50%, 0);
 }
 
 .toggle {

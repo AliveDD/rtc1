@@ -161,6 +161,7 @@ export default function App() {
               } else {
                 myVideo.src = window.URL.createObjectURL(remoteStream);
               }
+              myVideo.style.display = "block";
               myVideo.play();
             });
           })
@@ -202,6 +203,7 @@ export default function App() {
             } else {
               theyVideo.src = window.URL.createObjectURL(stream);
             }
+            theyVideo.style.display = "block";
             theyVideo.play();
           });
         })
