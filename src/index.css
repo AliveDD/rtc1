@@ -20,7 +20,7 @@ body {
 } */
 
 .myVideo {
-  border: 2px solid hsla(240, 50%, 50%, 1);
+  box-shadow: 0 0 24px 0 turquoise;
   min-width: 85vw;
   position: absolute;
   z-index: 1;
@@ -29,7 +29,7 @@ body {
   transform: scaleX(-1) translate(50%, 0);
 }
 .theyVideo {
-  border: 2px solid hsla(240, 50%, 50%, 1);
+  box-shadow: 0 0 24px 0 rgba(64, 224, 208, 0.09);
   min-width: 85vw;
   position: absolute;
   z-index: 1;
@@ -44,4 +44,78 @@ body {
   top: 0;
   left: 0;
   width: 100px;
+}
+
+main {
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 32px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+input,
+button {
+  font: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  display: block;
+  width: 100%;
+}
+
+input {
+  appearance: none;
+  border-bottom: 2px solid #c8c8c8;
+  font-size: 18px;
+  line-height: 1.618em;
+  margin-bottom: 1em;
+}
+input::placeholder {
+  color: turquoise;
+}
+
+button {
+  color: black;
+  background-color: turquoise;
+  text-align: center;
+  margin: 8px 0;
+  line-height: 2.5;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.9;
+}
+
+button:not([disabled]):hover {
+  opacity: 1;
+}
+
+[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+h2 {
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  padding: 4px 0;
+  box-sizing: border-box;
 }

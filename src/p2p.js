@@ -7,8 +7,6 @@ import React, {
 } from "react";
 import Peer from "peerjs";
 
-import "./styles.css";
-
 const initialState = {
   names: {},
 };
