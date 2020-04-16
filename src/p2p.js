@@ -169,6 +169,7 @@ export default function App() {
 
         incomingConnection.off("open", onOpen);
       };
+
       const onClose = () => {
         removeFromSwarm(incomingConnection);
         incomingConnection.off("close", onClose);
@@ -180,41 +181,40 @@ export default function App() {
     [handleIncomingConnection, removeFromSwarm]
   );
 
+  const onCall = (call) => {
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+        audio: true,
+      })
+      .then((stream) => {
+        console.log("stream", stream);
+        call.answer(stream);
+
+        call.on("stream", (stream) => {
+          if ("srcObject" in theyVideo) {
+            theyVideo.srcObject = stream;
+          } else {
+            theyVideo.src = window.URL.createObjectURL(stream);
+          }
+          theyVideo.style.display = "block";
+          theyVideo.play();
+        });
+      })
+      .catch(() => {});
+  };
+
   const init = useCallback(() => {
     peer.current.on("open", (id) => {
       setMyPeerId(id);
     });
-
-    peer.current.on("call", (call) => {
-      // console.log("2 handleIncomingConnection conn", conn);
-
-      navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-          audio: true,
-        })
-        .then((stream) => {
-          console.log("stream", stream);
-          call.answer(stream);
-
-          call.on("stream", (stream) => {
-            if ("srcObject" in theyVideo) {
-              theyVideo.srcObject = stream;
-            } else {
-              theyVideo.src = window.URL.createObjectURL(stream);
-            }
-            theyVideo.style.display = "block";
-            theyVideo.play();
-          });
-        })
-        .catch(() => {});
-    });
-
+    peer.current.on("call", onCall);
     peer.current.on("connection", onIncoming);
   }, [onIncoming]);
 
   const cleanup = useCallback(() => {
     peer.current.off("open", setMyPeerId);
+    peer.current.off("call", onCall);
     peer.current.off("connection", onIncoming);
   }, [onIncoming]);
 
